@@ -4,11 +4,11 @@
 
 To Run this without docker : 
 
-1. Create and export a environment variable called folder
-   folder=<path to the log directory>
+1. Create and export a environment variable called folder :
+   folder=<path to the log directory> ;
    export folder
-   
-2. Then run the app.js
+
+2. Then run the app.js :
    node app.js
 
 3. To access the webapp, navigate to http://<IP-of-host-machine>:3000/tails
