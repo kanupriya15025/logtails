@@ -21,3 +21,12 @@ To run the docker version :
    sudo docker pull kanu15025/log-scroll-final:v5
 2. Run the image :
    sudo docker run -it -v <hostfolder>:<mount-folder-on-container> -p 3000:3000 -e folder=<mount-folder-on- container> kanu15025/log-scroll-final:v5
+
+
+
+To use features :
+
+1. Specify n : 
+   append url with &n=<desired-value-of-n>
+2. Specify pattern :
+   append url with &grep=<value>
