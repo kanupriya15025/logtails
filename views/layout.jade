@@ -1,0 +1,31 @@
+
+doctype
+html
+  head
+    title Tail Logs
+    
+    style(type='text/css').
+        #body-id {
+        font-family: monospace;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 20px;
+        }
+    
+    base(href='/')
+  body#body-id
+    header
+      h1 Tail Files
+
+    footer
+      p#para Click on the file to see the tail 
+      ul
+        each list in lists
+          li
+            if home == true
+              a(href="/tails/p?filename=/"+list)= list
+            else
+              a(href="/tails/p?filename="+log+"/"+list)= list
+          

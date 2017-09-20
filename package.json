@@ -1,0 +1,16 @@
+{
+  "name": "tail_web_app",
+  "version": "0.0.1",
+  "author": "Kanupriya Batra <kanupriya.b@media.net>",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "3.0.0alpha4",
+    "ip": "^1.1.5",
+    "jade": "^1.0.4",
+    "socket.io": "^2.0.3"
+  }
+}
