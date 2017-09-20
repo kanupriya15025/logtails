@@ -1,4 +1,3 @@
-
 var express = require('express');
 
 var path = require('path');
@@ -56,8 +55,7 @@ app.get('/tails/p*',function(req,res){
   {lists:files2,
   currenturl:req.path,
   log:logpath,
-  home:false,
-  ipaddr:ip.address()})
+  home:false})
 })
 
   }
