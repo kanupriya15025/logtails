@@ -1,0 +1,43 @@
+
+#top {
+        position:fixed;
+        left:0;
+        right:0;
+        top:0;
+        height:100px;
+        z-index:3;
+        color: blue;
+        background-color:white;
+        text-align: center;
+}
+img{ float: left;}
+
+.content {
+        position:relative;
+        left:0;
+        right:0;
+        padding:10px;
+        top:200px;
+        z-index:2;
+}
+.content .out {
+        font-family: monospace;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 20px;
+        padding:10px;
+        
+}
+#stop {
+    background-color: red; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    float : right;
+}

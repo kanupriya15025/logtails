@@ -2,8 +2,7 @@
 var express = require('express');
 
 var path = require('path');
-var files1 = [];
-//var testFolder = '/var/log';
+//var files1 = [];
 var testFolder = process.env.folder;
 const fs = require('fs');
 
@@ -12,13 +11,6 @@ var cp = require ('child_process'),
 
 
 
-
-fs.readdir(testFolder, (err, files) => {
-  files.forEach(file => {
-    //console.log(file);
-    files1.push(file);
-  });
-})
 
 var n = 50;
 var word = 'none';
@@ -34,7 +26,7 @@ server=http.createServer(app);
 var io = require('socket.io').listen(server);
 
 app.set('views', __dirname + '/views')
-app.set('stylesheets',__dirname + '/stylesheets')
+app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'jade')
 app.use(express.logger('dev'))
@@ -56,8 +48,7 @@ app.get('/tails/p*',function(req,res){
   {lists:files2,
   currenturl:req.path,
   log:logpath,
-  home:false,
-  ipaddr:ip.address()})
+  home:false})
 })
 
   }
@@ -65,28 +56,45 @@ app.get('/tails/p*',function(req,res){
   n = req.query.n || n;
   word = req.query.grep || 'none';
   filename=testFolder+logpath;  
-    res.render('display_file',
+  res.render('display_file',
   {
+    currenturl:req.path, 
     logfilename : testFolder+logpath,
-     grep:word
+    log:logpath,
+    grep:word
   });
 
 
   }
 })
 
+
+
 app.get('/tails', function (req, res) {
   console.log("tails path="+ req.path);
 
-
+  var listoffiles = function(){
+    let files1 = [];
+    fs.readdirSync(testFolder).forEach(function(file){
+      if(fs.lstatSync(testFolder+file).isDirectory()){
+        files1.push(file+'-type-dir');
+      }
+      else{
+      files1.push(file+'-type-file');
+      }
+    });
+    return files1;
+  }
 
   res.render('layout',
-  { lists : files1 ,
+  { lists : listoffiles() ,
   currenturl:req.path,
   home:true,
 }
   )
 })
+
+
 
 
 io.sockets.on ('connection', function (socket)

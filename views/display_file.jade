@@ -1,84 +1,31 @@
 doctype
 html
+  
   head
     title Tail of file #{logfilename}
 
     script(type='text/javascript', src='/socket.io/socket.io.js')
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-
-    //link(rel='stylesheet', href='/stylesheets/style.css')
-    style(type='text/css').
-        #top {
-        position:fixed;
-        left:0;
-        right:0;
-        top:0;
-        height:100px;
-        z-index:3;
-
-        background:white;
-        }
-        .content {
-        position:relative;
-        left:0;
-        right:0;
-        padding:10px;
-        top:100px;
-        z-index:2;
-        }
-        .content .out {
-        font-family: monospace;
-        font-size: 14px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 400;
-        line-height: 20px;
-        padding:10px;
-        
-        }
-
-
     script(type='text/javascript').
-        $(function (){
-
-        var socket = io(),$status = $('p#status'),$tail = $('ul#tail');
-        //$tail.append
-        socket.on ('connect', function (){
-        //$status.html ("Socket connected");
-        });
-        socket.on ('error', function (error){
-        $status.html ( "Error: " + error );});
-        socket.on ('data', function (data){
-        $.each (data.lines, function (key, line){
-        if(line.length == 0)
-        return;
-        
-        var grep = !{JSON.stringify(grep)};
-        if(grep=='none'){
-        $tail.append ('<li>' + line + '</li>');
-        }
-        else if (line.indexOf(grep)!=-1){
-        $tail.append ('<li>' + line + '</li>');
-        }
-        $("html, body").scrollTop($("#withoutreason").offset().top);
-        });
-        });
-        
-        var $buttonstop = $('button#stop');
-        $buttonstop.on('click', function() {
-        socket.disconnect();
-        console.log('disconnected');
-        });
-        });
+        var grep =!{JSON.stringify(grep)}
+    script(type='text/javascript' src='/JS/js_display_file.js')
+    link(href='/stylesheets/style_display_file.css', rel='stylesheet')
 
   div#top
-        button#stop Stop Logs
-        h1 Tail of file #{logfilename}
+      a(href='/tails')
+        img(src='/images/home.png' width="50px")
+      button#stop Stop Logs
+      h1 Tail of file #{logfilename}
+      form(method="GET", action="#{currenturl}")
+        input(type="hidden", name="filename", value="#{log}")
+        p Grep Keyword
+          input(type="text", name="grep")
+          input(type="submit")      
 
   .content
         p#status
         .out Tail-output
-            ul#tail
+          ul#tail
   div#withoutreason
   br
   br

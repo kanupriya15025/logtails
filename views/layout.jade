@@ -2,30 +2,37 @@
 doctype
 html
   head
-    title Tail Logs
-    
-    style(type='text/css').
-        #body-id {
-        font-family: monospace;
-        font-size: 14px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 400;
-        line-height: 20px;
-        }
-    
-    base(href='/')
-  body#body-id
-    header
-      h1 Tail Files
-
-    footer
-      p#para Click on the file to see the tail 
-      ul
-        each list in lists
-          li
-            if home == true
-              a(href="/tails/p?filename=/"+list)= list
-            else
-              a(href="/tails/p?filename="+log+"/"+list)= list
-          
+      title Log Tails
+      link(href='/stylesheets/style_layout.css', rel='stylesheet')
+      base(href='/')
+      script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+      script(type='text/javascript' src='/JS/js_layout.js')
+      body#body-id
+        header
+          a(href='/tails')
+            img(src='/images/home.png' width="50px" title="Home" float="left")
+          h1 Log Tails
+          select(id="fileselector")
+            option(selected disabled) Choose file extension
+            option(value='.gz') .gz
+            option(value='.log') .log
+            option(value='.txt') .txt
+            option(value='clear') Clear filter
+          br
+          br
+        table(id='filelist')   
+          tbody
+            each list in lists
+              -var name = list.split('-type-')[0]
+              -var type = list.split('-type-')[1]
+              tr
+                td#img-td
+                  if type == 'dir' 
+                    img(src="/images/folder copy.png" width="30px")
+                  else
+                    img(src="/images/file copy.png" width="30px")
+                td
+                  if home == true
+                    a(href="/tails/p?filename=/"+name)= name
+                  else
+                    a(href="/tails/p?filename="+log+"/"+list)= name
